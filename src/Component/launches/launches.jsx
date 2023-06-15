@@ -1,23 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { TableContext } from "../../TableContext.tsx";
+import { TableContext } from "../../TableContext.jsx";
 import "./style.css";
-
-interface launchesProps {
-  name: string;
-  details: string;
-  ships: [];
-}
 
 const Launches = () => {
   const { activeTable, setActiveTable } = useContext(TableContext);
 
-  const setError = (error: string) => {
+  const setError = (error) => {
     error = "404";
     return { error };
   };
 
-  const [launchesData, setLaunchesData] = useState<launchesProps[]>([]);
+  const [launchesData, setLaunchesData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {

@@ -1,23 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import "./Style.css";
-import { TableContext } from "../../TableContext.tsx";
-
-interface capsuleProps {
-  serial: string;
-  type: string;
-  status: string;
-}
+import { TableContext } from "../../TableContext";
 
 const Capsules = () => {
   const { activeTable, setActiveTable } = useContext(TableContext);
 
-  const setError = (error: string) => {
+  const setError = (error) => {
     error = "404";
     return { error };
   };
 
-  const [capsulesData, setCapsulesData] = useState<capsuleProps[]>([]);
+  const [capsulesData, setCapsulesData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {

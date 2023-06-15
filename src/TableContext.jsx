@@ -1,16 +1,11 @@
 import React, { createContext, useState } from "react";
 
-interface TableContextProps {
-  activeTable: string;
-  setActiveTable: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export const TableContext = createContext<TableContextProps>({
+const TableContext = createContext({
   activeTable: "",
   setActiveTable: () => {},
 });
 
-export const TableProvider: React.FC = ({ children }) => {
+const TableProvider = ({ children }) => {
   const [activeTable, setActiveTable] = useState("");
 
   return (
@@ -19,3 +14,5 @@ export const TableProvider: React.FC = ({ children }) => {
     </TableContext.Provider>
   );
 };
+
+export { TableContext, TableProvider };
