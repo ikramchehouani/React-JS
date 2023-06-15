@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import axios from 'axios'
 import './style.css'
-interface LaunchesProps {
+interface launchesProps {
     name: string,
     details: string,
     ships: [],
@@ -14,7 +14,7 @@ const Launches = () => {
   }
 
   const [showTable, setShowTable] = useState(false)
-  const [launchesData, setLaunchesData] = useState<LaunchesProps[]>([]);
+  const [launchesData, setLaunchesData] = useState<launchesProps[]>([]);
 
   useEffect(() => {
     axios
@@ -45,11 +45,11 @@ const Launches = () => {
         </tr>
       </thead>
       <tbody>
-        {launchesData.map((launches, index) => (
+        {launchesData.map((launche, index) => (
           <tr key={index}>
-            <td>{launches.name}</td>
-            <td>{launches.details}</td>
-            <td>{launches.ships.length}</td>
+            <td>{launche.name}</td>
+            <td>{launche.details}</td>
+            <td>{launche.ships.length}</td>
           </tr>
           ))}
       </tbody>

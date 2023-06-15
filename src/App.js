@@ -1,11 +1,11 @@
 import './App.css'
-import Capsule from './Component/capsules/Capsules.tsx'
+import Capsules from './Component/capsules/capsules.tsx'
 import Launches from './Component/launches/launches.tsx'
 
 function App() {
   return (
     <div >
-     <Capsule></Capsule>
+     <Capsules></Capsules>
      <Launches></Launches>
     </div>
   )

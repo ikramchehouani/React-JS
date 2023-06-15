@@ -2,20 +2,20 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import './Style.css'
 
-interface CapsuleProps {
+interface capsuleProps {
   serial: string,
   type: string,
   status: string,
 }
 
-const Capsule = () => {
+const Capsules = () => {
   const setError = (error: string) => {
     error = "404"
     return { error }
   }
 
   const [showTable, setShowTable] = useState(false)
-  const [capsulesData, setCapsulesData] = useState<CapsuleProps[]>([]);
+  const [capsulesData, setCapsulesData] = useState<capsuleProps[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -55,7 +55,7 @@ const Capsule = () => {
     <caption><button onClick={handleButtonClick}> <h1>Show Capsules</h1></button> </caption>
       {showTable && ( 
         <table>
-          <caption> <h1># Capsules</h1></caption>
+          <caption> <h1>#Capsules</h1></caption>
           <thead>
             <tr>
               <th>Serial</th>
@@ -78,4 +78,4 @@ const Capsule = () => {
   )
 }
 
-export default Capsule
+export default Capsules
