@@ -1,13 +1,14 @@
 import './App.css'
-import Capsules from './Component/capsules/capsules.tsx'
+import Capsules from './Component/capsules/Capsules.tsx'
 import Launches from './Component/launches/launches.tsx'
+import { TableProvider } from "../src/TableContext.tsx";
 
 function App() {
   return (
-    <div >
-     <Capsules></Capsules>
-     <Launches></Launches>
-    </div>
+    <TableProvider>
+      <Capsules />
+      <Launches />
+    </TableProvider>
   )
 }
 
