@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./style.css";
+import "../../Component/style.css";
 
 const CapsulesOffline = () => {
   const [capsulesData, setCapsulesData] = useState([]);
@@ -25,8 +25,9 @@ const CapsulesOffline = () => {
 
   return (
     <div>
-      <h1>You are offline</h1>
-      <p>Here are the latest data we could retrieve:</p>
+      <h2>You are offline</h1>
+      <p>Here are the latest data we could retrieve : </p>
+      <h1>Capsules</h1>
       <table className="capsules-table">
         <thead>
           <tr>

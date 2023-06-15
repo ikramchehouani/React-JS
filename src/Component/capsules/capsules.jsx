@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { TableContext } from "../../TableContext";
-import "./style.css";
+import "../../Component/style.css";
 
 const Capsules = () => {
   const { activeTable, setActiveTable } = useContext(TableContext);
