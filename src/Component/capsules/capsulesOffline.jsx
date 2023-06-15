@@ -8,10 +8,13 @@ const CapsulesOffline = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "https://api.spacexdata.com/v4/capsules"
-        );
-        setCapsulesData(response.data);
+        if ("caches" in window) {
+          const cachedResponse = await caches.match("https://api.spacexdata.com/v4/capsules");
+          if (cachedResponse) {
+            const cachedData = await cachedResponse.json();
+            setCapsulesData(cachedData);
+          }
+        }
       } catch (error) {
         console.error(error);
       }
@@ -22,8 +25,8 @@ const CapsulesOffline = () => {
 
   return (
     <div>
-      <h1>Vous êtes hors ligne</h1>
-      <p>Voici les dernières données que nous avons pu récupérer :</p>
+      <h1>You are offline</h1>
+      <p>Here are the latest data we could retrieve:</p>
       <table className="capsules-table">
         <thead>
           <tr>
@@ -47,3 +50,4 @@ const CapsulesOffline = () => {
 };
 
 export default CapsulesOffline;
+

@@ -4,8 +4,8 @@ import Launches from "./Component/launches/launches";
 import { TableProvider } from "./TableContext";
 import CapsulesOffline from "./Component/capsules/capsulesOffline";
 import LaunchesOffline from "./Component/launches/launchesOffline";
-
 import "./App.css";
+import { register } from "./serviceWorker";
 
 const App = () => {
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
@@ -22,6 +22,10 @@ const App = () => {
       window.removeEventListener("offline", handleOfflineStatus);
       window.removeEventListener("online", handleOfflineStatus);
     };
+  }, []);
+
+  useEffect(() => {
+    register(); // Register the service worker
   }, []);
 
   return (

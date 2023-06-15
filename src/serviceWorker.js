@@ -1,23 +1,21 @@
-self.addEventListener("fetch", (event) => {
-    event.respondWith(
-      caches.match(event.request).then((response) => {
-        if (response) {
-          return response;
-        }
-  
-        return fetch(event.request).then((response) => {
-          if (!response || response.status !== 200 || response.type !== "basic") {
-            return response;
-          }
-  
-          const responseToCache = response.clone();
-  
-          caches.open("capsules").then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-  
-          return response;
+export function register() {
+  if ("serviceWorker" in navigator) {
+    const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
+    if (publicUrl.origin !== window.location.origin) {
+      return;
+    }
+
+    window.addEventListener("load", () => {
+      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
+
+      navigator.serviceWorker
+        .register(swUrl)
+        .then((registration) => {
+          console.log("Service Worker registered successfully.");
+        })
+        .catch((error) => {
+          console.error("Error registering Service Worker:", error);
         });
-      })
-    );
-  });
+    });
+  }
+}

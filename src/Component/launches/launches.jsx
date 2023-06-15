@@ -16,8 +16,14 @@ const Launches = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("https://api.spacexdata.com/v4/launches");
-        setLaunchesData(response.data);
+        const cachedData = localStorage.getItem("launchesData");
+        if (cachedData) {
+          setLaunchesData(JSON.parse(cachedData));
+        } else {
+          const response = await axios.get("https://api.spacexdata.com/v4/launches");
+          setLaunchesData(response.data);
+          localStorage.setItem("launchesData", JSON.stringify(response.data));
+        }
       } catch (error) {
         setError(error.message);
       }
@@ -37,7 +43,7 @@ const Launches = () => {
           onClick={handleLaunchesButtonClick}
           className={activeTable === "launches" ? "active" : ""}
         >
-          <h1>{activeTable === "launches" ? "Hide launches" : "Show launches"}</h1>
+          <h1>{activeTable === "launches" ? "Hide Launches" : "Show Launches"}</h1>
         </button>
       </caption>
       {activeTable === "launches" && (
