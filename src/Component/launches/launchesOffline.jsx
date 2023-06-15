@@ -9,7 +9,9 @@ const LaunchesOffline = () => {
     const fetchData = async () => {
       try {
         if ("caches" in window) {
-          const cachedResponse = await caches.match("https://api.spacexdata.com/v4/launches");
+          const cachedResponse = await caches.match(
+            "https://api.spacexdata.com/v4/launches"
+          );
           if (cachedResponse) {
             const cachedData = await cachedResponse.json();
             setLaunchesData(cachedData);
@@ -25,28 +27,29 @@ const LaunchesOffline = () => {
 
   return (
     <div>
+      <h2>You are offline</h2>
+      <p>Here are the latest data we could retrieve:</p>
       <h1>Launches</h1>
       <table className="launches-table">
         <thead>
           <tr>
-            <th>Serial</th>
-            <th>Status</th>
-            <th>Type</th>
+            <th>Name</th>
+            <th>Details</th>
+            <th>Ships</th>
           </tr>
         </thead>
         <tbody>
-            {launchesData.map((launch, index) => (
-              <tr key={index}>
-                <td>{launch.name}</td>
-                <td>{launch.details}</td>
-                <td>{launch.ships.length}</td>
-              </tr>
-            ))}
-          </tbody>
+          {launchesData.map((launch, index) => (
+            <tr key={index}>
+              <td>{launch.name}</td>
+              <td>{launch.details}</td>
+              <td>{launch.ships.length}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );
 };
 
 export default LaunchesOffline;
-

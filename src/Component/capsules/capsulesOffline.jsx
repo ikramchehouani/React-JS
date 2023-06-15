@@ -9,7 +9,9 @@ const CapsulesOffline = () => {
     const fetchData = async () => {
       try {
         if ("caches" in window) {
-          const cachedResponse = await caches.match("https://api.spacexdata.com/v4/capsules");
+          const cachedResponse = await caches.match(
+            "https://api.spacexdata.com/v4/capsules"
+          );
           if (cachedResponse) {
             const cachedData = await cachedResponse.json();
             setCapsulesData(cachedData);
@@ -25,8 +27,8 @@ const CapsulesOffline = () => {
 
   return (
     <div>
-      <h2>You are offline</h1>
-      <p>Here are the latest data we could retrieve : </p>
+      <h2>You are offline</h2>
+      <p>Here are the latest data we could retrieve:</p>
       <h1>Capsules</h1>
       <table className="capsules-table">
         <thead>
@@ -51,4 +53,3 @@ const CapsulesOffline = () => {
 };
 
 export default CapsulesOffline;
-

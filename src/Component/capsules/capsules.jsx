@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { TableContext } from "../../TableContext";
 import "../../Component/style.css";
+import CapsulesOffline from "../capsules/capsulesOffline";
 
 const Capsules = () => {
   const { activeTable, setActiveTable } = useContext(TableContext);
@@ -16,7 +17,9 @@ const Capsules = () => {
     const fetchData = async () => {
       try {
         if ("caches" in window) {
-          const cachedResponse = await caches.match("https://api.spacexdata.com/v4/capsules");
+          const cachedResponse = await caches.match(
+            "https://api.spacexdata.com/v4/capsules"
+          );
           if (cachedResponse) {
             const cachedData = await cachedResponse.json();
             setCapsulesData(cachedData);
@@ -28,7 +31,10 @@ const Capsules = () => {
         // Cache the data
         if ("caches" in window) {
           const cache = await caches.open("capsules");
-          cache.put("https://api.spacexdata.com/v4/capsules", new Response(JSON.stringify(response.data)));
+          cache.put(
+            "https://api.spacexdata.com/v4/capsules",
+            new Response(JSON.stringify(response.data))
+          );
         }
       } catch (error) {
         setError(error.message);
@@ -53,27 +59,33 @@ const Capsules = () => {
         </button>
       </caption>
       {activeTable === "capsules" && (
-        <table>
-          <caption>
-            <h1>#Capsules</h1>
-          </caption>
-          <thead>
-            <tr>
-              <th>Serial</th>
-              <th>Status</th>
-              <th>Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            {capsulesData.map((capsule, index) => (
-              <tr key={index}>
-                <td>{capsule.serial}</td>
-                <td>{capsule.status}</td>
-                <td>{capsule.type}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <>
+          {capsulesData.length > 0 ? (
+            <table>
+              <caption>
+                <h1>#Capsules</h1>
+              </caption>
+              <thead>
+                <tr>
+                  <th>Serial</th>
+                  <th>Status</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {capsulesData.map((capsule, index) => (
+                  <tr key={index}>
+                    <td>{capsule.serial}</td>
+                    <td>{capsule.status}</td>
+                    <td>{capsule.type}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <CapsulesOffline />
+          )}
+        </>
       )}
     </div>
   );
