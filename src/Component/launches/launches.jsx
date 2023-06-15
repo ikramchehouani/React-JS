@@ -27,14 +27,17 @@ const Launches = () => {
   }, []);
 
   const handleLaunchesButtonClick = () => {
-    setActiveTable("launches");
+    setActiveTable(activeTable === "launches" ? "" : "launches");
   };
 
   return (
     <div>
       <caption>
-        <button onClick={handleLaunchesButtonClick}>
-          <h1>Show launches</h1>
+        <button
+          onClick={handleLaunchesButtonClick}
+          className={activeTable === "launches" ? "active" : ""}
+        >
+          <h1>{activeTable === "launches" ? "Hide launches" : "Show launches"}</h1>
         </button>
       </caption>
       {activeTable === "launches" && (

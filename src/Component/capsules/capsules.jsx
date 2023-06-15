@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import "./Style.css";
-import { TableContext } from "../../TableContext";
+import { TableContext } from "../../TableContext.jsx";
+import "./style.css";
 
 const Capsules = () => {
   const { activeTable, setActiveTable } = useContext(TableContext);
@@ -27,14 +27,17 @@ const Capsules = () => {
   }, []);
 
   const handleCapsulesButtonClick = () => {
-    setActiveTable("capsules");
+    setActiveTable(activeTable === "capsules" ? "" : "capsules");
   };
 
   return (
-    <>
+    <div>
       <caption>
-        <button onClick={handleCapsulesButtonClick}>
-          <h1>Show Capsules</h1>
+        <button
+          onClick={handleCapsulesButtonClick}
+          className={activeTable === "capsules" ? "active" : ""}
+        >
+          <h1>{activeTable === "capsules" ? "Hide Capsules" : "Show Capsules"}</h1>
         </button>
       </caption>
       {activeTable === "capsules" && (
@@ -60,7 +63,7 @@ const Capsules = () => {
           </tbody>
         </table>
       )}
-    </>
+    </div>
   );
 };
 
